@@ -1,7 +1,8 @@
 package ch.demo.properties;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -21,10 +22,9 @@ public class PropertiesHolder {
 	 */
 	public static void loadPropertiesFile() throws IOException,
 			NullPointerException {
-		URL url = Thread.currentThread().getContextClassLoader()
-				.getResource(filePath + fileName);
+		FileInputStream fis = new FileInputStream(fileName);
 		properties = new Properties();
-		properties.load(url.openStream());
+		properties.load(fis);
 	}
 
 	/**
@@ -35,9 +35,8 @@ public class PropertiesHolder {
 	 */
 	public static void saveProperiesFile() throws IOException,
 			NullPointerException {
-		URL url = Thread.currentThread().getContextClassLoader()
-				.getResource(filePath + fileName);
-		properties.store(url.openConnection().getOutputStream(), "Kommentar");
+		FileOutputStream fos = new FileOutputStream(fileName);
+		properties.store(fos, "Kommentar");
 	}
 
 	/**
