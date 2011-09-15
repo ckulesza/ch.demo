@@ -13,17 +13,31 @@ public class PropertiesHolder {
 	private static String fileName;
 	private static String filePath;
 	private static Properties properties;
-	
+
 	/**
 	 * Lädt die Properties aus der Properydatei.
 	 * 
 	 * @throws IOException
 	 */
-	public static void loadPropertiesFile() throws IOException, NullPointerException {
+	public static void loadPropertiesFile() throws IOException,
+			NullPointerException {
 		URL url = Thread.currentThread().getContextClassLoader()
 				.getResource(filePath + fileName);
 		properties = new Properties();
 		properties.load(url.openStream());
+	}
+
+	/**
+	 * Speichert die Properties in die Propertydatei.
+	 * 
+	 * @throws IOException
+	 * @throws NullPointerException
+	 */
+	public static void saveProperiesFile() throws IOException,
+			NullPointerException {
+		URL url = Thread.currentThread().getContextClassLoader()
+				.getResource(filePath + fileName);
+		properties.store(url.openConnection().getOutputStream(), "Kommentar");
 	}
 
 	/**
